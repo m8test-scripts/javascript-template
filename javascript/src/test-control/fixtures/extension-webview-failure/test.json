@@ -2,13 +2,15 @@
   "type": "extensionTest",
   "protocolVersion": "2.0.0",
   "requestId": "javascript-extension-webview-failure",
-  "extensionId": "com.m8test.extension.webview",
-  "capabilityId": "com.m8test.capability.webview.ui.test",
   "testProtocol": "webview-ui-test/v1",
   "processSlotId": "main",
   "processInstanceId": "current",
   "uiSessionId": "javascript-extension-webview-failure",
   "scenarioFile": "scenario.json",
   "expectedOutcome": "failed",
-  "timeoutMillis": 30000
+  "timeoutMillis": 30000,
+  "extension": {
+    "groupId": "com.m8test.extension",
+    "artifactId": "webview"
+  }
 }

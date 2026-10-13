@@ -45,6 +45,7 @@ m8testJavascript {
     }
     // debugger 闭包用于配置调试器(安卓设备)的信息
     debugger {
+        adbDeviceSerial = providers.gradleProperty("adbDeviceSerial").orNull
         // 本地设备验证时通过 -Pm8test.device.serial=<serial> 指定设备，避免回退到 deviceIp:adbPort。
         providers.gradleProperty("m8test.device.serial").orNull?.let {
             adbDeviceSerial = it
@@ -62,28 +63,25 @@ m8testJavascript {
         // 打包apk时的运行时模板apk配置, 打包apk时会将脚本项目打包到该模板apk中
         runtimeConfig {
             // 模板apk的版本
-            versionName = m8testVersion
-            // 模板apk下载地址
-            downloadUrl =
-                "https://github.com/m8test/runtime-release/releases/download/${versionName}/com.m8test.app.runtime-release_${versionName}.apk"
+            version = m8testVersion
         }
         // M8Test 开发工具配置闭包
         developmentKitConfig {
             // 开发工具的包名, 使用默认就好
             packageName = "com.m8test.app.developmentkit"
             // 开发工具版本
-            versionName = m8testVersion
-            // 开发工具下载地址
-            downloadUrl =
-                "https://github.com/m8test/development-kit-release/releases/download/$versionName/com.m8test.app.developmentkit-release_$versionName.apk"
+            version = m8testVersion
+            localApk = providers.gradleProperty("developmentKitApk").orNull?.let(::file)
             // api文档根目录
             docsRoot = "https://sdk-docs.m8test.com/sdk"
         }
     }
     settingsConfig {
         language {
-            extensionId = "com.m8test.extension.language.javascript"
+            groupId = "com.m8test.extension.language"
+            artifactId = "javascript"
             entryId = "javascript"
+            version = m8testVersion
         }
     }
     // 脚本项目配置闭包
@@ -91,24 +89,9 @@ m8testJavascript {
         // 是否将插件(语言/组件)打包进脚项目中, 如果不将插件打包进脚本项目中，那么运行时会从网络下载需要的语言以及组件，但是需要确保能正常访问外网，这种方式打包速度快，推荐开发时使用这种方式;如果是打包成apk，推荐将插件打包进脚项目中, 这样交付给用户之后就可以直接使用，而无需从网络下载插件, 但是这样安装包会更大
         isPluginsBundled = false
         // WebView 能力由独立 Runtime Extension 提供；变量名仍由语言绑定决定。
-        requireComponent {
-            name = "M8Test WebView Extension"
-            version = webViewExtensionVersion
-            url = "https://github.com/m8test/m8test-webview-extension/releases/download/$webViewExtensionVersion/com.m8test.extension.webview-release_$webViewExtensionVersion.apk"
-            extensionId = "com.m8test.extension.webview"
-        }
-        requireComponent {
-            name = "M8Test Virtual Display Extension"
-            version = virtualDisplayExtensionVersion
-            url = "https://github.com/m8test/m8test-virtual-display-extension/releases/download/$virtualDisplayExtensionVersion/com.m8test.extension.virtual-display-release_$virtualDisplayExtensionVersion.apk"
-            extensionId = "com.m8test.extension.virtual-display"
-        }
-        requireComponent {
-            name = "M8Test Compose Extension"
-            version = composeExtensionVersion
-            url = "https://github.com/m8test/m8test-compose-extension/releases/download/$composeExtensionVersion/com.m8test.extension.compose-release_$composeExtensionVersion.apk"
-            extensionId = "com.m8test.extension.compose"
-        }
+        requireComponent("com.m8test.extension", "webview", webViewExtensionVersion)
+        requireComponent("com.m8test.extension", "virtual-display", virtualDisplayExtensionVersion)
+        requireComponent("com.m8test.extension", "compose", composeExtensionVersion)
         // 相对于res目录的资源文件,会打包到apk的assets目录下
         // 这个文件表示apk启动时自动执行的脚本, 只能是true或者false
         addAsset("auto_start_spa.txt")

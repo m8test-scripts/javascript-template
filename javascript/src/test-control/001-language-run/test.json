@@ -2,12 +2,18 @@
   "manifestVersion": 1,
   "protocolVersion": "2.0.0",
   "requestId": "javascript-template-language-run",
-  "extensionId": "com.m8test.extension.language.javascript",
-  "languageEntryId": "javascript",
   "fileName": "main.js",
   "scriptFile": "main.js",
   "timeoutMillis": 30000,
   "properties": {},
   "components": [],
-  "expectedLogs": ["test-control-language:javascript:passed"]
+  "expectedLogs": [
+    "test-control-language:javascript:passed"
+  ],
+  "language": {
+    "groupId": "com.m8test.extension.language",
+    "artifactId": "javascript",
+    "version": "0.1.46",
+    "languageEntryId": "javascript"
+  }
 }
