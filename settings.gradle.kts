@@ -35,5 +35,5 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "m8test-gradle-templates"
+rootProject.name = "m8test-javascript-template"
 include(":javascript")
