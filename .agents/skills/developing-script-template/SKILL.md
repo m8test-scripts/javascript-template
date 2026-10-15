@@ -7,6 +7,12 @@ description: 当需要开发、测试或验证本脚本项目模板及其语言�
 
 本技能用于开发本项目提供的脚本模板。先从 `README.md`、`settings.gradle.kts` 和 Gradle 配置识别语言与任务前缀。
 
+处理 JavaScript 的 JVM 类访问或 callback 互操作时，继续读取 `accessing-jvm-from-javascript` 技能；它记录 Rhino 的源代码语法与设备端验证要求。
+
+处理脚本集合构造、JVM 数组类型或 `$objectWrappers` 时，继续读取 `using-host-values-and-wrappers` 技能；它说明宿主集合工厂和 wrapper 的分工及转换边界。
+
+发现或使用脚本全局变量时，读取 `using-script-global-variables` 技能；它要求从当前项目的生成任务确认完整变量名和类型。
+
 ## 日常流程
 
 1. 阅读本仓库现有脚本、资源、`src/test-control` fixture 和项目配置，再修改模板内容。
