@@ -151,3 +151,20 @@ project.spa/
 `init/access-jvm.js` 是展示 Rhino 通过 `Packages` 访问 Java 类的示例，必须在入口脚本前执行并保留。SPA 根目录不能出现重复的 `com/example/...` 或顶层 `access-jvm.js`；这些文件分别应位于 `src/` 和 `init/` 下。
 
 模板中的 `sides` 示例包含 `side1.js` 和 `side2.js`。执行 `runJavascript` 时，Runtime 会启动一个主 ProjectScript 和两个独立的 side ProjectScript（显示为 `project`、`project.side0`、`project.side1`）；这不是任务被执行了三次。删除或清空 `projectConfig.sides` 后才会变成单一入口项目。
+
+## APK 启动策略
+
+应用身份在 `projectConfig` 中设置：`name` 是显示名称，`packageName` 是唯一包名，`versionName` 与 `versionCode` 控制版本，`logo` 指向 `res` 下的图标。构建生成的脚本配置会将这些值应用到 APK。`appName`、`appVersionName` 和 `appVersionCode` Gradle 属性可覆盖名称和版本。默认安装后自动运行脚本。需要由用户点击运行时，在语言配置块中选择手动启动：
+
+```kotlin
+m8testJavascript {
+    apkBuild {
+        launchMode = "manual"
+    }
+}
+```
+
+`launchMode` 只接受 `"automatic"` 或 `"manual"`。手动模式显示启动页，由用户决定何时运行。
+## 发布签名
+
+APK 默认使用开发签名。发布时在 `m8testJavascript { apkBuild { ... } }` 中设置 `signingMode = "release"`、密钥库路径和别名，并通过 `providers.environmentVariable("M8TEST_RELEASE_STORE_PASSWORD")` 与 `providers.environmentVariable("M8TEST_RELEASE_KEY_PASSWORD")` 提供密码。发布 APK 在本机签名并验证，输出到 `build/apk/`。密钥库和密码不会进入生成源码或设备项目；缺少发布签名配置时构建会失败。请把密钥库保存在受控位置并排除在版本控制之外，JDK `keytool` 可用于生成、导入和导出密钥材料。
