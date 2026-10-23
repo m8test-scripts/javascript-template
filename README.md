@@ -152,6 +152,9 @@ project.spa/
 
 模板中的 `sides` 示例包含 `side1.js` 和 `side2.js`。执行 `runJavascript` 时，Runtime 会启动一个主 ProjectScript 和两个独立的 side ProjectScript（显示为 `project`、`project.side0`、`project.side1`）；这不是任务被执行了三次。删除或清空 `projectConfig.sides` 后才会变成单一入口项目。
 
+
+默认会把项目声明的 Extension 依赖及其传递依赖一并嵌入 APK，安装后无需联网即可运行。若要减小 APK 体积，可在 `apkBuild` 中设置 `bundleExtensions = false`；此时运行环境必须已安装所需 Extension，或能够从配置的 Maven 仓库下载。
+
 ## APK 启动策略
 
 应用身份在 `projectConfig` 中设置：`name` 是显示名称，`packageName` 是唯一包名，`versionName` 与 `versionCode` 控制版本，`logo` 指向 `res` 下的图标。构建生成的脚本配置会将这些值应用到 APK。`appName`、`appVersionName` 和 `appVersionCode` Gradle 属性可覆盖名称和版本。默认安装后自动运行脚本。需要由用户点击运行时，在语言配置块中选择手动启动：
