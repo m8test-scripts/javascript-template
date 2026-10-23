@@ -59,7 +59,7 @@ m8testJavascript {
         // adb 设备序列, 如果您通过数据线连接则需要填写adb设备序列, 例如 emulator-5554, 如果设置了此属性的话并且不为null的话 adbPort 和 deviceIp 会被忽略
         // adbDeviceSerial = "emulator-5554"
         // 安卓设备的ip地址, 这里是局域网的ip地址, 如果是云手机的话可能需要内网穿透, 这里的ip就需要填写有公网ip的服务器的ip地址
-        deviceIp = "192.168.31.13"
+        deviceIp = "192.168.31.14"
         // M8Test脚本项目根路径, 电脑端构建好的项目会推送到该路径对应的目录
         workspace = "/sdcard/M8Test/project"
         // 安卓设备的adb调试端口, 如果是云手机的话就需要填写内网穿透时映射的adb端口

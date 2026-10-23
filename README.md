@@ -167,7 +167,7 @@ m8testJavascript {
 }
 ```
 
-`launchMode` 只接受 `"automatic"` 或 `"manual"`。手动模式显示启动页，由用户决定何时运行。
+`launchMode` 只接受 `"automatic"` 或 `"manual"`。手动模式显示启动页，由用户决定何时运行。运行环境入口默认随 `launchMode` 显示：手动启动时显示，自动启动时隐藏。可在 `apkBuild` 中设置 `runtimeEnvironmentVisible = true` 或 `false` 显式覆盖；启动失败时仍提供恢复入口。
 ## 发布签名
 
 APK 默认使用开发签名。发布时在 `m8testJavascript { apkBuild { ... } }` 中设置 `signingMode = "release"`、密钥库路径和别名，并通过 `providers.environmentVariable("M8TEST_RELEASE_STORE_PASSWORD")` 与 `providers.environmentVariable("M8TEST_RELEASE_KEY_PASSWORD")` 提供密码。发布 APK 在本机签名并验证，输出到 `build/apk/`。密钥库和密码不会进入生成源码或设备项目；缺少发布签名配置时构建会失败。请把密钥库保存在受控位置并排除在版本控制之外，JDK `keytool` 可用于生成、导入和导出密钥材料。
