@@ -1,0 +1,27 @@
+{
+  "manifestVersion": 1,
+  "protocolVersion": "2.0.0",
+  "requestId": "javascript-template-thread-timer-context",
+  "fileName": "main.js",
+  "scriptFile": "main.js",
+  "timeoutMillis": 30000,
+  "properties": {
+    "m8test.testControl.adbPort": "5555"
+  },
+  "components": [],
+  "expectedLogs": [
+    "thread-context:javascript:immediate",
+    "thread-context:javascript:timeout",
+    "thread-context:javascript:interval",
+    "thread-context:javascript:thread",
+    "thread-context:javascript:thread-start",
+    "thread-context:javascript:thread-exit",
+    "thread-context:javascript:verified"
+  ],
+  "language": {
+    "groupId": "com.m8test.extension.language",
+    "artifactId": "javascript",
+    "version": "0.1.46",
+    "languageEntryId": "javascript"
+  }
+}

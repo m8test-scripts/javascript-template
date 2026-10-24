@@ -1,0 +1,39 @@
+{
+  "manifestVersion": 1,
+  "protocolVersion": "2.0.0",
+  "requestId": "javascript-template-coroutine-thread-context",
+  "fileName": "main.js",
+  "scriptFile": "main.js",
+  "timeoutMillis": 30000,
+  "properties": {
+    "m8test.testControl.adbPort": "5555"
+  },
+  "components": [],
+  "expectedLogs": [
+    "coroutine:javascript:launch",
+    "coroutine:javascript:async",
+    "coroutine:javascript:async-success",
+    "coroutine:javascript:with-context",
+    "coroutine:javascript:flow:1",
+    "coroutine:javascript:flow:2",
+    "coroutine:javascript:flow-complete",
+    "coroutine:javascript:flow-catch",
+    "coroutine:javascript:flow-completion:true",
+    "coroutine:javascript:flow-recovered",
+    "coroutine:javascript:buffer-ok",
+    "coroutine:javascript:debounce-ok",
+    "coroutine:javascript:sample-ok",
+    "coroutine:javascript:timeout-observed",
+    "coroutine:javascript:channel-cleanup",
+    "coroutine:javascript:callback-flow-cleanup-once",
+    "coroutine:javascript:callback-flow-ok",
+    "coroutine:javascript:cancelled-work-complete",
+    "coroutine:javascript:gate"
+  ],
+  "language": {
+    "groupId": "com.m8test.extension.language",
+    "artifactId": "javascript",
+    "version": "0.1.46",
+    "languageEntryId": "javascript"
+  }
+}

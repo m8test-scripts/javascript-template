@@ -1,0 +1,23 @@
+{
+  "manifestVersion": 1,
+  "protocolVersion": "2.0.0",
+  "requestId": "javascript-template-coroutine-natural-finish-drain",
+  "fileName": "main.js",
+  "scriptFile": "main.js",
+  "timeoutMillis": 15000,
+  "properties": { "m8test.testControl.adbPort": "5555" },
+  "components": [],
+  "expectedLogs": [
+    "coroutine:javascript:natural-finish-work-started",
+    "coroutine:javascript:natural-finish-main-returning",
+    "Coroutine shutdown is still draining: activeJobs=1 pendingNotifications=0",
+    "coroutine:javascript:natural-finish-cleanup",
+    "coroutine:javascript:natural-finish-cancelled"
+  ],
+  "language": {
+    "groupId": "com.m8test.extension.language",
+    "artifactId": "javascript",
+    "version": "0.1.46",
+    "languageEntryId": "javascript"
+  }
+}
