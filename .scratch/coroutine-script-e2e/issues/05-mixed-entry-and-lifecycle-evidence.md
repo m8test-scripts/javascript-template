@@ -26,4 +26,4 @@ Status: claimed
 
 暂无。
 
-设备证据：本项目的 `002` Thread/Timer、`003` 基础协程和 Flow、`004`–`009` 关闭/错误/中断/自然结束/取消传播场景均已在设备 Test Control 实际运行。尚未逐项核对所有公开与继承 API，也未完成本项目完整场景集合，因此工单保持进行中。
+设备证据：本项目的 `002` Thread/Timer、`003` 基础协程和 Flow、`004`–`009` 关闭/错误/中断/自然结束/取消传播场景以及新增 `010-coroutine-cancellation-composition` Test Control 用例均已通过真实脚本运行。新增场景断言 `withTimeout` 取消不被 `catchError` 恢复、`withTimeoutOrNull` 返回 null、`loopWithTimeout` 超时、`loop` 三轮结束以及组合等待成功。续体取消回调竞态未纳入该用例，仍需单独验证。尚未逐项核对所有公开与继承 API，也未完成本项目完整场景集合，因此工单保持进行中。

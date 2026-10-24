@@ -1,0 +1,31 @@
+{
+  "manifestVersion": 1,
+  "protocolVersion": "2.0.0",
+  "requestId": "javascript-template-coroutine-cancellation-composition",
+  "fileName": "main.js",
+  "scriptFile": "main.js",
+  "timeoutMillis": 10000,
+  "properties": {
+    "m8test.testControl.adbPort": "5555"
+  },
+  "components": [],
+  "expectedLogs": [
+    "coroutine:javascript:timeout-cancellation-preserved",
+    "coroutine:javascript:timeout-or-null-ok",
+    "coroutine:javascript:timeout-or-null-complete:false",
+    "coroutine:javascript:loop-timeout-cancelled-wait",
+    "coroutine:javascript:loop-iteration:1",
+    "coroutine:javascript:loop-iteration:2",
+    "coroutine:javascript:loop-iteration:3",
+    "coroutine:javascript:loop-completed-count:3",
+    "coroutine:javascript:composed-wait-ok",
+    "coroutine:javascript:composed-wait-complete:false",
+    "coroutine:javascript:cancellation-gate"
+  ],
+  "language": {
+    "groupId": "com.m8test.extension.language",
+    "artifactId": "javascript",
+    "version": "0.1.46",
+    "languageEntryId": "javascript"
+  }
+}
