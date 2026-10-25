@@ -15,8 +15,10 @@
     "thread-context:javascript:interval",
     "thread-context:javascript:thread",
     "thread-context:javascript:thread-start",
+    "thread-context:javascript:verified",
+    "thread-context:javascript:thread-interrupt",
     "thread-context:javascript:thread-exit",
-    "thread-context:javascript:verified"
+    "thread-context:javascript:worker-timer"
   ],
   "language": {
     "groupId": "com.m8test.extension.language",

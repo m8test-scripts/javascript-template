@@ -1,13 +1,40 @@
 const scope = $coroutines.newScope(null);
 const timer = $script.getThreads().getMain().getTimer();
+scope.launch(function(context) {
+  context.setName("script-main");
+  context.setDispatcher(function(dispatchers) { return dispatchers.getScriptMain(); });
+  if (String(context.getName()) !== "script-main") throw new Error("coroutine context name mismatch");
+}, null, function(s) {
+  if (!$script.getThreads().getCurrent().isCurrent()) throw new Error("script-main dispatcher mismatch");
+  $logger.info("coroutine:javascript:script-main-verified");
+});
+const capturedScriptValue = "javascript-captured";
+var otherTaskProgress = false;
+timer.setTimeout(function(params) { otherTaskProgress = true; $logger.info("coroutine:javascript:other-task-progressed"); }, 50);
+scope.launch(function(context) { context.setDispatcher(function(dispatchers) { return dispatchers.getIO(); }); }, null, function(s) {
+  if (String(capturedScriptValue) !== "javascript-captured") throw new Error("captured script value mismatch");
+  $logger.info("coroutine:javascript:io-captured-value-verified");
+});
+scope.delay(200).onSuccess(function(value) {
+  if (String(capturedScriptValue) !== "javascript-captured") throw new Error("delayed script value mismatch");
+  if (!otherTaskProgress) throw new Error("other task did not progress during delay");
+  $logger.info("coroutine:javascript:delayed-captured-value-verified");
+});
 scope.launch(null, null, function(s) { $logger.info("coroutine:javascript:launch"); });
 scope._async(null, null, function(s) { $logger.info("coroutine:javascript:async"); return 7; })
-  .onSuccess(function(value) { $logger.info("coroutine:javascript:async-success"); });
+  .onSuccess(function(value) {
+    if (Number(value) !== 7) throw new Error("async value mismatch: " + value);
+    $logger.info("coroutine:javascript:async-success");
+  });
 scope.withContext(function(context) {}, function(s) { $logger.info("coroutine:javascript:with-context"); return 9; });
 $coroutines.getFlows().of(1, 2).map(function(s, value) {
   $logger.info("coroutine:javascript:flow:" + value);
   return s.resolve(value * 2);
-}).toList(scope).onSuccess(function(values) { $logger.info("coroutine:javascript:flow-complete"); });
+}).toList(scope).onSuccess(function(values) {
+  if (values.length !== 2 || Number(values[0]) !== 2 || Number(values[1]) !== 4)
+    throw new Error("flow mapped values mismatch");
+  $logger.info("coroutine:javascript:flow-complete");
+});
 scope.delay(5000).onComplete(function() { $logger.info("coroutine:javascript:cancelled-work-complete"); });
 $coroutines.getFlows().create(function(s, collector) { throw new Error("flow-boom"); })
 ._catch(function(s, collector, error) {

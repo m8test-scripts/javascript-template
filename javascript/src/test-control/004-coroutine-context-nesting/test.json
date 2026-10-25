@@ -1,0 +1,25 @@
+{
+  "manifestVersion": 1,
+  "protocolVersion": "2.0.0",
+  "requestId": "javascript-template-coroutine-context-nesting",
+  "fileName": "main.js",
+  "scriptFile": "main.js",
+  "timeoutMillis": 30000,
+  "properties": { "m8test.testControl.adbPort": "5555" },
+  "components": [],
+  "expectedLogs": [
+    "nest:javascript:outer-started",
+    "nest:javascript:outer-resumed",
+    "nest:javascript:inner-callback",
+    "nest:javascript:other-task-progressed",
+    "nest:javascript:delay-resumed",
+    "nest:javascript:gate"
+  ],
+  "expectedOutcome": "succeeded",
+  "language": {
+    "groupId": "com.m8test.extension.language",
+    "artifactId": "javascript",
+    "version": "0.1.46",
+    "languageEntryId": "javascript"
+  }
+}

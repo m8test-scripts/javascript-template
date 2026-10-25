@@ -10,6 +10,10 @@
   },
   "components": [],
   "expectedLogs": [
+    "coroutine:javascript:script-main-verified",
+    "coroutine:javascript:io-captured-value-verified",
+    "coroutine:javascript:other-task-progressed",
+    "coroutine:javascript:delayed-captured-value-verified",
     "coroutine:javascript:launch",
     "coroutine:javascript:async",
     "coroutine:javascript:async-success",

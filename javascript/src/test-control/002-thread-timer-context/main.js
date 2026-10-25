@@ -1,6 +1,8 @@
 const timer = $script.getThreads().getMain().getTimer();
 let count = 0; let interval = 0;
 let timeoutArgs = false; let immediateDone = false; let worker = false; let nested = false;
+let workerThread = null;
+let workerTimerDone = false;
 const nestedResult = timer.runWithThreadContext(function() {
   return timer.runWithThreadContext(function() { return "nested"; });
 });
@@ -25,12 +27,36 @@ interval = timer.setInterval(function(params) {
     $logger.info("thread-context:javascript:interval");
   }
 }, 75, "tick");
-$script.getThreads().onStart(function(thread) { $logger.info("thread-context:javascript:thread-start"); });
-$script.getThreads().onExit(function(thread) { $logger.info("thread-context:javascript:thread-exit"); });
-$script.getThreads().start("thread-context-worker", function(thread) { worker = true; $logger.info("thread-context:javascript:thread"); });
+$script.getThreads().onStart(function(thread) {
+  if (!thread.isCurrent()) throw new Error("thread start isCurrent=false");
+  if (thread.isMain()) throw new Error("thread start isMain=true");
+  if (!thread.isAlive() || thread.isInterrupted()) throw new Error("thread start state mismatch");
+  if (String(thread.getName()) !== "thread-context-worker") throw new Error("thread start name=" + thread.getName());
+  $logger.info("thread-context:javascript:thread-start");
+});
+$script.getThreads().onExit(function(thread) {
+  if (!thread.isCurrent()) throw new Error("thread exit isCurrent=false");
+  if (thread.isMain()) throw new Error("thread exit isMain=true");
+  if (!thread.isAlive() || thread.isInterrupted()) throw new Error("thread exit state mismatch");
+  if (String(thread.getName()) !== "thread-context-worker") throw new Error("thread exit name=" + thread.getName());
+  $logger.info("thread-context:javascript:thread-exit");
+});
+workerThread = $script.getThreads().start("thread-context-worker", function(thread) {
+  thread.setBackground(true);
+  if (!thread.isBackground()) throw new Error("background state was not set");
+  thread.getTimer().setImmediate(function(params) { workerTimerDone = true; $logger.info("thread-context:javascript:worker-timer"); });
+  worker = true;
+  $logger.info("thread-context:javascript:thread");
+});
 
 timer.setTimeout(function(params) {
-  if (!timeoutArgs || !nested || !worker || !immediateDone || count !== 2)
+  if (!timeoutArgs || !nested || !worker || !workerTimerDone || !immediateDone || count !== 2)
     throw new Error("timer callback state mismatch");
+  if (workerThread === null || !workerThread.isAlive()) throw new Error("worker should remain alive in background");
+  workerThread.interrupt();
+  if (!workerThread.isInterrupted()) throw new Error("interrupt state was not observable");
+  workerThread.setBackground(false);
+  if (workerThread.isBackground()) throw new Error("background state was not cleared");
+  $logger.info("thread-context:javascript:thread-interrupt");
   $logger.info("thread-context:javascript:verified");
 }, 500);
