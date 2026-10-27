@@ -1,0 +1,56 @@
+{
+  "formatVersion": 1,
+  "source": "https://github.com/m8test-core/skills.git",
+  "declarationSha256": "a151b8c73674946951ca91f7bf3d15d9b16f12df618ba6bdbd61d0e030803c65",
+  "commit": "e3faea88bb1a232af4212e648866fe20ce59909b",
+  "skills": [
+    {
+      "path": "skills/writing-commit-messages",
+      "installName": "writing-commit-messages",
+      "sha256": "8d3e5015ebd896c6d74532d109e6c17ae26b9cef93c13a60ea7b35c16a91d219",
+      "executableFiles": []
+    },
+    {
+      "path": "skills/resolving-merge-conflicts",
+      "installName": "resolving-merge-conflicts",
+      "sha256": "ae2a66719d8df35bfa26c775aba9134d81e41a816bdeda841ba9071bfd12dd44",
+      "executableFiles": []
+    },
+    {
+      "path": "skills/running-gradle",
+      "installName": "running-gradle",
+      "sha256": "e7bfdf4c605d432c91e4875f36460305310ca2b8510c27bb59aa2193abf4fcae",
+      "executableFiles": []
+    },
+    {
+      "path": "skills/working-across-m8test-repositories",
+      "installName": "working-across-m8test-repositories",
+      "sha256": "f4a0b59b6f81112667d46305edc5cc2abc8224d31f48cbb62e3513a34600c5ba",
+      "executableFiles": []
+    },
+    {
+      "path": "skills/developing-script-projects",
+      "installName": "developing-script-projects",
+      "sha256": "3ad9f82e8e9956ca9070269c91efd28b90de2e32e1f02003a46ed71d82cc593e",
+      "executableFiles": []
+    },
+    {
+      "path": "skills/using-script-global-variables",
+      "installName": "using-script-global-variables",
+      "sha256": "c0c7d6b1414d00e6468ccd9277d248be1cfd68ff6ebc67e457aecd8b3ebf8085",
+      "executableFiles": []
+    },
+    {
+      "path": "skills/using-host-values-and-wrappers",
+      "installName": "using-host-values-and-wrappers",
+      "sha256": "464ca1aee84c800b8b0eecdd5fa5959f628a7d6331d9c956559dd00d84f01072",
+      "executableFiles": []
+    },
+    {
+      "path": "skills/accessing-jvm-from-rhino",
+      "installName": "accessing-jvm-from-rhino",
+      "sha256": "d1aa11fa76e53cdbaf9945dff9199ea0ef48a77c8c281885415fe987764a61e5",
+      "executableFiles": []
+    }
+  ]
+}

@@ -2,7 +2,10 @@
   "formatVersion": 1,
   "source": "https://github.com/m8test-core/skills.git",
   "profiles": [
-    "script-project"
+    "common",
+    "script-project",
+    "host-wrappers",
+    "rhino-interop"
   ],
   "include": [],
   "exclude": []
