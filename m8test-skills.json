@@ -1,0 +1,9 @@
+{
+  "formatVersion": 1,
+  "source": "https://github.com/m8test-core/skills.git",
+  "profiles": [
+    "script-project"
+  ],
+  "include": [],
+  "exclude": []
+}

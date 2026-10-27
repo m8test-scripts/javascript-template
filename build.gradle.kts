@@ -1,4 +1,8 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
+plugins {
+    alias(m8test.plugins.m8test.gradle.skills)
+}
+
 buildscript {
     repositories {
         mavenLocal()
