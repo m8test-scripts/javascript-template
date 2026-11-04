@@ -64,7 +64,11 @@ m8testJavascript {
         // 安卓设备的adb调试端口, 如果是云手机的话就需要填写内网穿透时映射的adb端口
         adbPort = 5555
         // 安卓设备调试器服务启动的端口
-        port = 5354
+        port = providers.gradleProperty("debugger.port").get().toInt()
+        auth {
+            username = providers.gradleProperty("debugger.auth.username").get()
+            password = providers.gradleProperty("debugger.auth.password").get()
+        }
         // M8Test 开发工具配置闭包
         developmentKitConfig {
             // 开发工具的包名, 使用默认就好
