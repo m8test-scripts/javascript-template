@@ -1,0 +1,7 @@
+{
+  "m8test.project.name": "JavaScript 脚本示例",
+  "m8test.project.description": "展示如何创建支持多语言的 JavaScript 脚本项目。",
+  "demo.counter.label": "点击次数：",
+  "demo.counter.button": "点击我",
+  "demo.language": "脚本语言：JavaScript"
+}

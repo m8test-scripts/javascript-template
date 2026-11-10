@@ -21,20 +21,23 @@ $composeView.create((slot) => {
         column.setContent((columnSlot) => {
             columnSlot.Text((text) => {
                 // 使用状态值设置文本内容；Compose 绑定会在读取状态时自动追踪重组
-                text.setText("点击次数: " + state.getValue())
+                text.setText($stringResources.getString("demo.counter.label") + state.getValue())
             })
             columnSlot.TextButton((button) => {
                 // 设置按钮显示的内容
                 button.setContent((buttonSlot) => {
                     // 设置按钮文本
                     buttonSlot.Text((text) => {
-                        text.setText("点击我")
+                        text.setText($stringResources.getString("demo.counter.button"))
                     })
                 })
                 button.setOnClick(() => {
                     // 点击按钮时，更新状态值
                     state.setValue(state.getValue() + 1)
                 })
+            })
+            columnSlot.Text((text) => {
+                text.setText($stringResources.getString("demo.language"))
             })
         })
     })
