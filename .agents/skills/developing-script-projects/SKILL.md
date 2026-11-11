@@ -12,3 +12,5 @@ description: 开发或验证 M8Test 脚本语言模板及由其构建、运行�
 - 修改脚本全局变量时先确认目标模板版本生成的完整名称、类型和可用时机。
 - 仅在改动涉及脚本可执行性时选择对应语言/引擎验证；不默认运行设备或全部 Test Control。
 - 修改模板行为时检查模板生成后的项目是否仍遵循预期契约。语言专属语法、JVM 转换和构建配置由对应本地技能维护。
+- 需要在项目模块上下文中验证入口时，为每个场景添加 `src/project-test/<用例>/test.json` 与同语言入口脚本，并运行 `verify<Language>ProjectTests`。任务在隔离的 BuildProjectSource 副本中替换已配置入口，再沿用项目构建和启动流程；要求 `-PadbDeviceSerial` 与项目设备配置一致。
+- `src/project-test` 是项目上下文测试，适合验证入口初始化和同步断言；READY 不表示 UI 或异步脚本已完成。`src/test-control` 仍用于独立脚本上下文测试，不需要加载项目模块时优先使用它。
