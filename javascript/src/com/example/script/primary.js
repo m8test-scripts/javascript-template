@@ -31,7 +31,7 @@ $composeView.create((slot) => {
                         text.setText($stringResources.getString("demo.counter.button"))
                     })
                 })
-                button.setOnClick(() => {
+                button.onClick(() => {
                     // 点击按钮时，更新状态值
                     state.setValue(state.getValue() + 1)
                 })
